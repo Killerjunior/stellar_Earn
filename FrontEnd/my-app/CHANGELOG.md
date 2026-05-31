@@ -82,8 +82,7 @@ _None yet._
 
                                       ### 馃悰 Fixed
 
-                                      - Restored missing administrative type and schema definitions (`Quest`, `QuestFormData`, `QuestStatus`, `QuestDifficulty`) in `lib/types/admin.ts` to resolve compilation blocks on the dashboard and admin panels. (#881)
-                                      - Corrected type alignments, async hook properties, dynamic import mappings, and custom Vitest matcher types across the frontend codebase. (#881)
+- Tests: updated `lib/api/client.test.ts` to include response-interceptor tests for token-refresh failures.
 
                                       ### 馃敀 Security
 

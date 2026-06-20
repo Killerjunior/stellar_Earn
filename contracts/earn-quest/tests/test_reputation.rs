@@ -497,7 +497,7 @@ fn test_register_custom_badge_type_and_grant() {
         name: SString::from_str(&env, "Trailblazer"),
         description: SString::from_str(&env, "First-mover badge."),
         xp_reward: 50,
-          true,
+          is_active: true,
     };
     client.register_badge_type(&admin, &bt);
 
@@ -543,7 +543,7 @@ fn test_register_duplicate_badge_type_rejected() {
         name: SString::from_str(&env, "Rookie"),
         description: SString::from_str(&env, "dup"),
         xp_reward: 0,
-          true,
+          is_active: true,
     };
     client.register_badge_type(&admin, &bt);
 }
@@ -566,7 +566,7 @@ fn test_grant_inactive_badge_rejected() {
         name: SString::from_str(&env, "Rookie"),
         description: SString::from_str(&env, "off"),
         xp_reward: 0,
-          false,
+          is_active: false,
     };
     client.update_badge_type(&admin, &bt);
 
@@ -610,7 +610,7 @@ fn test_non_admin_cannot_register_badge_type() {
         name: SString::from_str(&env, "Rogue"),
         description: SString::from_str(&env, "x"),
         xp_reward: 0,
-          true,
+          is_active: true,
     };
     client.register_badge_type(&outsider, &bt);
 }

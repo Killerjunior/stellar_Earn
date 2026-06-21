@@ -145,8 +145,8 @@ pub fn arbitrator_scheduled(env: &Env, scheduled_time: u64, new_arbitrator: Addr
 
 /// Emitted when the arbitrator is changed (indexed: old_arbitrator, new_arbitrator)
 pub fn arbitrator_changed(env: &Env, old_arbitrator: Option<Address>, new_arbitrator: Address) {
-    // Use Option in topics by encoding presence: if old_arbitrator is Some use it else use a zero-generated address
-    let old = old_arbitrator.unwrap_or(Address::from_contract_id(&env, &env.current_contract_address()));
+    // If no old arbitrator provided, use the current contract address as a sentinel.
+    let old = old_arbitrator.unwrap_or_else(|| env.current_contract_address());
     let topics = (TOPIC_ARBITRATOR_CHANGED, old.clone(), new_arbitrator.clone());
     let data = (old, new_arbitrator);
     env.events().publish(topics, data);

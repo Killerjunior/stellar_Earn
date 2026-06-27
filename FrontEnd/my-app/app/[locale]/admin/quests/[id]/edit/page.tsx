@@ -103,11 +103,17 @@ function EditQuestContent({ questId }: EditQuestContentProps) {
     <>
       <div className="space-y-6">
         <nav className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
-          <Link href="/admin" className="hover:text-zinc-700 dark:hover:text-zinc-300">
+          <Link
+            href="/admin"
+            className="hover:text-zinc-700 dark:hover:text-zinc-300"
+          >
             Admin
           </Link>
           <span>/</span>
-          <Link href="/admin/quests" className="hover:text-zinc-700 dark:hover:text-zinc-300">
+          <Link
+            href="/admin/quests"
+            className="hover:text-zinc-700 dark:hover:text-zinc-300"
+          >
             Quests
           </Link>
           <span>/</span>

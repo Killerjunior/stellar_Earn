@@ -88,11 +88,7 @@ describe('RetryButton', () => {
     const onRetry = vi.fn();
 
     render(
-      <RetryButton
-        isVisible={true}
-        onRetry={onRetry}
-        buttonText="Try Again"
-      />
+      <RetryButton isVisible={true} onRetry={onRetry} buttonText="Try Again" />
     );
 
     expect(
@@ -103,9 +99,7 @@ describe('RetryButton', () => {
   it('shows error message when retry fails', async () => {
     const errorMessage = 'Network error occurred';
 
-    const onRetry = vi
-      .fn()
-      .mockRejectedValue(new Error(errorMessage));
+    const onRetry = vi.fn().mockRejectedValue(new Error(errorMessage));
 
     const user = userEvent.setup();
 
@@ -122,28 +116,20 @@ describe('RetryButton', () => {
     const onRetry = vi.fn();
 
     const { rerender } = render(
-      <RetryButton
-        isVisible={true}
-        isLoading={false}
-        onRetry={onRetry}
-      />
+      <RetryButton isVisible={true} isLoading={false} onRetry={onRetry} />
     );
 
-    expect(
-      (screen.getByRole('button') as HTMLButtonElement).disabled
-    ).toBe(false);
+    expect((screen.getByRole('button') as HTMLButtonElement).disabled).toBe(
+      false
+    );
 
     rerender(
-      <RetryButton
-        isVisible={true}
-        isLoading={true}
-        onRetry={onRetry}
-      />
+      <RetryButton isVisible={true} isLoading={true} onRetry={onRetry} />
     );
 
-    expect(
-      (screen.getByRole('button') as HTMLButtonElement).disabled
-    ).toBe(true);
+    expect((screen.getByRole('button') as HTMLButtonElement).disabled).toBe(
+      true
+    );
 
     expect(screen.getByText('Retrying...')).toBeInTheDocument();
   });
@@ -151,13 +137,7 @@ describe('RetryButton', () => {
   it('supports full width styling', () => {
     const onRetry = vi.fn();
 
-    render(
-      <RetryButton
-        isVisible={true}
-        onRetry={onRetry}
-        fullWidth={true}
-      />
-    );
+    render(<RetryButton isVisible={true} onRetry={onRetry} fullWidth={true} />);
 
     expect(screen.getByRole('button').classList.contains('w-full')).toBe(true);
   });
@@ -173,9 +153,9 @@ describe('RetryButton', () => {
       />
     );
 
-    expect(
-      screen.getByRole('button').classList.contains('custom-class')
-    ).toBe(true);
+    expect(screen.getByRole('button').classList.contains('custom-class')).toBe(
+      true
+    );
   });
 
   it('has proper accessibility attributes', () => {
@@ -192,27 +172,15 @@ describe('RetryButton', () => {
     const onRetry = vi.fn();
 
     const { rerender } = render(
-      <RetryButton
-        isVisible={true}
-        isLoading={false}
-        onRetry={onRetry}
-      />
+      <RetryButton isVisible={true} isLoading={false} onRetry={onRetry} />
     );
 
-    expect(
-      screen.getByRole('button').getAttribute('aria-busy')
-    ).toBe('false');
+    expect(screen.getByRole('button').getAttribute('aria-busy')).toBe('false');
 
     rerender(
-      <RetryButton
-        isVisible={true}
-        isLoading={true}
-        onRetry={onRetry}
-      />
+      <RetryButton isVisible={true} isLoading={true} onRetry={onRetry} />
     );
 
-    expect(
-      screen.getByRole('button').getAttribute('aria-busy')
-    ).toBe('true');
+    expect(screen.getByRole('button').getAttribute('aria-busy')).toBe('true');
   });
 });

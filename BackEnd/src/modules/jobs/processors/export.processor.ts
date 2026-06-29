@@ -82,7 +82,7 @@ export class DataExportProcessor {
         where: { createdBy: userId },
       });
 
-      let payouts = [];
+      let payouts: Payout[] = [];
       if (user.stellarAddress) {
         payouts = await this.payoutRepo.find({
           where: { stellarAddress: user.stellarAddress },

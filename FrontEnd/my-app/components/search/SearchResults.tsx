@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import type { SearchResult } from '@/lib/api/search';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -11,6 +12,26 @@ interface SearchResultsProps {
   total: number;
   highlightedIndex: number;
   onResultClick: () => void;
+}
+
+/**
+ * Build the destination URL for a search result based on its type and id.
+ * - quest      → /quests/:id
+ * - user       → /profile/:id
+ * - submission → /submissions  (list page; individual submissions don't have a
+ *                               dedicated public URL in the current route tree)
+ */
+function getResultHref(result: SearchResult): string {
+  switch (result.type) {
+    case 'quest':
+      return `/quests/${result.id}`;
+    case 'user':
+      return `/profile/${result.id}`;
+    case 'submission':
+      return `/submissions`;
+    default:
+      return '/';
+  }
 }
 
 export function SearchResults({
@@ -179,11 +200,12 @@ export function SearchResults({
                 const currentIndex = globalIndex;
                 globalIndex++;
                 return (
-                  <button
+                  <Link
                     key={result.id}
                     id={`search-item-${currentIndex}`}
+                    href={getResultHref(result)}
                     onClick={onResultClick}
-                    className={`block w-full rounded px-2 py-2 text-left ${
+                    className={`block rounded px-2 py-2 ${
                       highlightedIndex === currentIndex
                         ? 'bg-[#089ec3]/10 dark:bg-[#089ec3]/20'
                         : 'hover:bg-zinc-100 dark:hover:bg-zinc-700'
@@ -210,7 +232,7 @@ export function SearchResults({
                         )}
                       </div>
                     </div>
-                  </button>
+                  </Link>
                 );
               })}
             </div>
